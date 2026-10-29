@@ -33,10 +33,14 @@
 
 **Interfaces:** `AppData`, `Command`, `applyCommand(data, command)`, `calculateCart(products, items, discount)`, `businessDate(date)`, `createDemoData(now)`.
 
-- [ ] Write tests for duplicate item aggregation, cash/change rounding, stock rejection without mutation, credit/debt payment, void restoration, idempotency, count reconciliation, and Philippine midnight.
-- [ ] Run the tests and observe missing behavior.
-- [ ] Implement domain operations and deterministic demo fixtures, then run the full unit suite.
-- [ ] Initialize a Git branch in the existing non-Git workspace; preserve old source through ignore rules and local backup instead of another worktree.
+- [x] Write tests for duplicate item aggregation, cash/change rounding, stock rejection without mutation, credit/debt payment, void restoration, idempotency, count reconciliation, and Philippine midnight.
+- [x] Run the tests and observe missing behavior.
+- [x] Implement domain operations and deterministic demo fixtures, then run the full unit suite.
+- [x] Initialize a Git branch in the existing non-Git workspace; preserve old source through ignore rules and local backup instead of another worktree.
+
+Task 1 implementation is split into `domain.ts` (command boundary), `types.ts`, `validation.ts`, `cart.ts`, `money.ts`, `dates.ts`, `csv.ts`, `command-context.ts`, and focused `commands/{sales,inventory,finance}.ts` modules. `demo.ts` generates fictional, deterministic sample records through those same commands. This keeps the shared contract compact without collecting all business behavior in one file.
+
+Task 1 validation: 29 domain tests, TypeScript, lint, and a production-dependency audit. Next.js route scaffolding, browser checks, and a production build are still owned by Task 3; no app routes exist yet.
 
 ### Task 2: Supabase database, security, and authentication
 

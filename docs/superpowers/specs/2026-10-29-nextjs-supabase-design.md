@@ -1,6 +1,6 @@
 # TindaHub Next.js and Supabase conversion — proposed design
 
-Status: draft for user review. Implementation and remote database changes have not started.
+Status: approved by the user. Task 1 (typed domain and dependency foundation) is implemented; Supabase migrations, auth, application screens, and final delivery remain. The user asked to prepare Supabase files without creating or changing a live project.
 
 ## Intent
 
@@ -28,7 +28,7 @@ The user explicitly chose Next.js, Supabase Postgres, responsive restyling, and 
 1. **Complete Next.js and Supabase conversion (recommended):** React replaces the PHP views, Next.js handles authenticated server operations, Supabase provides Auth and Postgres, and SQL functions preserve atomic business operations. This directly implements the requested stack, with the largest initial migration effort.
 2. **Next.js frontend with transitional PHP backend:** reuses PHP business logic initially, but retains PHP/MySQL hosting and requires a second backend migration. This only partially satisfies the request.
 
-This proposal uses approach 1. The recommendation does not imply approval of an unreviewed design.
+The user approved approach 1 and delegated implementation details.
 
 ## Scope and preserved behavior
 
@@ -104,15 +104,15 @@ Do not publish customer records, database dumps, credentials, screenshots contai
 
 A production deployment is outside the current request. GitHub push is explicitly authorized and does not require another permission question once the work is verified.
 
-## Open decisions requiring user input
+## Decisions clarified after review
 
-1. Which Supabase project should hold TindaHub? If a new project is wanted, which organization should own it? Do not reuse the campus project by assumption.
-2. Preserve existing MySQL business records or start with a fresh database and optional sample products?
-3. Approval of this proposed full-conversion design, or an instruction to proceed with implementation choices delegated to the implementer.
+1. Prepare versioned Supabase database files and setup instructions only. No live project should be created or changed in this task.
+2. Do not import private records automatically. Preserve the PHP/MySQL source locally and provide fictional demo fixtures for initial testing.
+3. Full-conversion design is approved; implementation details and the eventual GitHub push are authorized.
 
 ## Documentation checked
 
 - Next.js installation: https://nextjs.org/docs/app/getting-started/installation
 - Supabase SSR clients: https://supabase.com/docs/guides/auth/server-side/nextjs
 
-No application conversion, live database migration, test execution against the replacement, or GitHub push has been performed yet.
+Task 1 is covered by the domain test suite. No live database migration or complete browser/application verification has been performed yet. The later tasks must satisfy the remaining verification and delivery requirements.
