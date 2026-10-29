@@ -54,6 +54,7 @@ test("a count of one product never restores untouched stock sold elsewhere", asy
     await page
       .getByRole("button", { name: "Save product", exact: true })
       .click();
+    await expect(page.getByRole("dialog")).not.toBeVisible();
   }
   await page.goto("/inventory/count");
   const saved = await page.evaluate(() =>
@@ -101,6 +102,7 @@ test("fractional cart lines display the same rounding as the receipt total", asy
   await page.getByLabel("Selling price").fill("0.29");
   await page.getByLabel("Opening stock").fill("1");
   await page.getByRole("button", { name: "Save product", exact: true }).click();
+  await expect(page.getByRole("dialog")).not.toBeVisible();
   await page.goto("/pos");
   await page.getByLabel("Search products").fill("Rounding Sample");
   await page
@@ -189,6 +191,7 @@ test("credit checkout, physical count, drawer entry and preferences work togethe
   await page
     .getByRole("button", { name: "Save cash record", exact: true })
     .click();
+  await expect(page.getByRole("dialog")).not.toBeVisible();
   await expect(
     page.getByText("Browser cash deposit", { exact: true }),
   ).toBeVisible();
@@ -255,6 +258,7 @@ test("cashier and owner workflows persist and reconcile in the explicit demo", a
   await page.getByLabel("Selling price").fill("13");
   await page.getByLabel("Opening stock").fill("20");
   await page.getByRole("button", { name: "Save product", exact: true }).click();
+  await expect(page.getByRole("dialog")).not.toBeVisible();
   await page.getByLabel("Search inventory").fill("Browser Test Snack");
   await expect(
     page.getByText("Browser Test Snack", { exact: true }),
@@ -269,18 +273,22 @@ test("cashier and owner workflows persist and reconcile in the explicit demo", a
   await page.getByLabel("Customer name").fill("Browser Test Customer");
   await page.getByLabel("Total amount").fill("100");
   await page.getByRole("button", { name: "Save debt", exact: true }).click();
+  await expect(page.getByRole("dialog")).not.toBeVisible();
   await page.getByLabel("Search customers").fill("Browser Test Customer");
+  await expect(page.locator(".record-table tbody tr")).toHaveCount(1);
   await page
     .getByRole("button", { name: "Record payment", exact: true })
     .click();
   await page.getByLabel("Payment amount").fill("40");
   await page.getByRole("button", { name: "Save payment", exact: true }).click();
+  await expect(page.getByRole("dialog")).not.toBeVisible();
   await expect(page.getByText("₱60.00", { exact: true }).first()).toBeVisible();
   await page.goto("/expenses");
   await page.getByRole("button", { name: "Add expense", exact: true }).click();
   await page.getByLabel("Description").fill("Browser test fare");
   await page.getByLabel("Expense amount").fill("20");
   await page.getByRole("button", { name: "Save expense", exact: true }).click();
+  await expect(page.getByRole("dialog")).not.toBeVisible();
   await expect(
     page.getByText("Browser test fare", { exact: true }),
   ).toBeVisible();
