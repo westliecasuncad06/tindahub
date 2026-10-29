@@ -70,4 +70,4 @@ Task 1 validation: 29 domain tests, TypeScript, lint, and a production-dependenc
 
 - [x] Document clean setup, demo versus real database behavior, schema application, optional legacy migration, and test commands.
 - [x] Run one independent whole-change review, resolve important findings with regression tests, and run the complete checks.
-- [ ] Scan publishable files for private data and secrets; commit, push using GitHub connector if local Git networking is unavailable, and verify the remote commit.
+- [x] Scan publishable files for private data and secrets; commit, push using GitHub connector if local Git networking is unavailable, and verify the remote commit.
