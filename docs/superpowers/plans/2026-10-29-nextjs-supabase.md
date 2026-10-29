@@ -48,10 +48,10 @@ Task 1 validation: 29 domain tests, TypeScript, lint, and a production-dependenc
 
 **Interfaces:** the same `AppData`/`Command` boundary from Task 1; `loadData()` and `executeCommand(command)` in the gateway, `app_snapshot()` and `app_command(command jsonb)` RPCs in Postgres.
 
-- [ ] Write executable database tests for two-store isolation, unauthorized RPCs, atomic checkout, duplicate requests, rollback, stock ledger, voids, and debt repayment.
-- [ ] Run them against the empty fixture database to observe absent schema.
-- [ ] Implement all tables, ownership/RLS, grants, transactions, owner bootstrap, and typed SSR/browser clients.
-- [ ] Verify database behavior and auth validation; supply instructions for the later live project, without claiming live Supabase verification.
+- [x] Write executable database tests for two-store isolation, unauthorized RPCs, atomic checkout, duplicate requests, rollback, stock ledger, voids, and debt repayment.
+- [x] Run them against the empty fixture database to observe absent schema.
+- [x] Implement all tables, ownership/RLS, grants, transactions, owner bootstrap, and typed SSR/browser clients.
+- [x] Verify database behavior and auth validation; supply instructions for the later live project, without claiming live Supabase verification.
 
 ### Task 3: Complete responsive application
 
@@ -59,16 +59,15 @@ Task 1 validation: 29 domain tests, TypeScript, lint, and a production-dependenc
 
 **Interfaces:** `useStore()` exposes data, loading/error, command execution, and preferences; features use only this contract.
 
-- [ ] Write browser scenarios for navigation, checkout, credit repayment, inventory/counts, expenses/drawer, settings/preferences, report CSV, and responsive overflow.
-- [ ] Run scenarios against the initial app to observe missing features.
-- [ ] Implement the approved visual direction and all feature flows with shared accessible dialogs, loading/error/empty states, CSV, and print layouts.
-- [ ] Run unit, database, lint, typecheck, production build, and browser checks; inspect actual screenshots at phone/tablet/desktop sizes.
+- [x] Write browser scenarios for navigation, checkout, credit repayment, inventory/counts, expenses/drawer, settings/preferences, report CSV, and responsive overflow.
+- [x] Run scenarios against the initial app to observe missing features.
+- [x] Implement the approved visual direction and all feature flows with shared accessible dialogs, loading/error/empty states, CSV, and print layouts.
+- [x] Run unit, database, lint, typecheck, production build, and browser checks; inspect actual screenshots at phone/tablet/desktop sizes.
 
 ### Task 4: Review and delivery
 
 **Files:** `README.md`, `docs/VERIFICATION.md`, `.github/workflows/ci.yml`, final review fixes.
 
-- [ ] Document clean setup, demo versus real database behavior, schema application, optional legacy migration, and test commands.
-- [ ] Run one independent whole-change review, resolve important findings with regression tests, and run the complete checks.
+- [x] Document clean setup, demo versus real database behavior, schema application, optional legacy migration, and test commands.
+- [x] Run one independent whole-change review, resolve important findings with regression tests, and run the complete checks.
 - [ ] Scan publishable files for private data and secrets; commit, push using GitHub connector if local Git networking is unavailable, and verify the remote commit.
-

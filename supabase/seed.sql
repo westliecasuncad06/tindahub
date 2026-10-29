@@ -1,0 +1,2 @@
+-- Intentionally empty. Real stores start empty.
+-- Fictional examples are generated only by the explicitly labeled browser-local demo.

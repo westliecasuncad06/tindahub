@@ -1,103 +1,88 @@
-# 🏪 TindaHub — Sari-Sari Store POS & Inventory System
+# TindaHub
 
-Isang production-ready web application para sa Philippine sari-sari store. Dinisenyo para sa tablet at counter, may mabilis na bentahan (POS), sukli computation, imbentaryo, tubong kita tracker, at mga ulat na nada-download bilang CSV at PDF.
+A responsive Next.js workspace for Philippine sari-sari stores, ready to connect to Supabase Postgres.
 
----
+## Run it locally
 
-## 🚀 Setup sa XAMPP (Mas mababa sa 10 Hakbang)
+Use **Node.js 22 or newer**.
 
-1. **Ilagay ang proyekto sa htdocs**
-   Siguraduhing ang folder ay nasa `C:\xampp\htdocs\store`.
-
-2. **Buksan ang XAMPP Control Panel**
-   Simulan (Start) ang **Apache** at **MySQL**.
-
-3. **I-import ang Database Schema**
-   Buksan ang terminal o command prompt at patakbuhin:
-   ```bash
-   mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS tindahub CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
-   mysql -u root -p tindahub < database/schema.sql
-   ```
-   *(Kung walang password ang root sa XAMPP, pindutin lamang ang Enter).*
-
-4. **I-seed ang Sample Data**
-   May kasamang 30 totoong paninda, 3 kategorya, at 2 linggong sample sales:
-   ```bash
-   mysql -u root -p tindahub < database/seed.sql
-   ```
-
-5. **I-check ang Database Connection**
-   Buksan ang `config/db.php`. Naka-configure na ito sa default ng XAMPP:
-   - Host: `127.0.0.1`
-   - Port: `3306`
-   - Database: `tindahub`
-   - Username: `root`
-   - Password: `""` (walang password)
-
-6. **Buksan ang Web App sa Browser**
-   Pumunta sa:
-   👉 **`http://localhost/store/`** o **`http://localhost/store/pos`**
-
-7. **Subukan ang Bentahan**
-   - Pindutin ang `/` para maghanap ng paninda (hal. `Lucky Me` o `Kopiko`).
-   - Pindutin ang `Enter` para idagdag sa cart.
-   - Pindutin ang `F2` para pumunta sa bayad.
-   - Piliin ang mabilisang cash (hal. ₱100) at pindutin ang **Kumpletuhin ang Benta**.
-
----
-
-## 🛠️ Invariant & Stock Ledger Verification Query
-
-Ang sistemang ito ay may **append-only stock movement ledger**. Ang dami ng stock sa `products.stock_qty` ay **palaging dapat katumbas** ng kabuuan ng `stock_movements.qty_change`:
-
-```sql
-SELECT 
-    p.id,
-    p.name AS paninda,
-    p.stock_qty AS stock_sa_products,
-    COALESCE(SUM(sm.qty_change), 0) AS kabuuang_sa_ledger,
-    (p.stock_qty - COALESCE(SUM(sm.qty_change), 0)) AS diperensya
-FROM products p
-LEFT JOIN stock_movements sm ON sm.product_id = p.id
-GROUP BY p.id, p.name, p.stock_qty
-HAVING ABS(diperensya) > 0.001;
+```powershell
+npm ci
+npm run dev
 ```
-> **Paalala:** Kung may lumabas sa query sa itaas, pumunta sa **Settings** (`/store/settings`) at i-click ang **"Suriin at Ayusin ang Stock"** para awtomatikong itama ang balanse.
 
----
+Open **http://127.0.0.1:3000**. The new app runs on the Next.js server; the previous XAMPP `/store` URL still belongs to the preserved PHP application.
 
-## ⌨️ Mga Keyboard Shortcut sa Bentahan (POS)
+Without Supabase environment values, an explicitly labeled **demo workspace** opens with fictional sample products and transaction history. Demo changes are saved only in this browser, including across reloads and tabs. Reset the examples in Settings. This is not offline mode for a real store.
 
-| Pindutan | Aksyon |
-|---|---|
-| `/` | Tumutok agad sa Search bar |
-| `Enter` | Idagdag ang unang resulta ng search sa cart |
-| `1` hanggang `9` | Idagdag ang kaukulang produkto (1–9) sa cart |
-| `F2` | Lumipat sa field ng Bayad ng kostumer |
-| `Esc` | I-clear ang buong laman ng cart |
-| `Space` | Magsimula ng Bagong Benta (kapag lumabas ang resibo) |
+## Connect a real database later
 
----
+Follow [the Supabase setup guide](docs/SUPABASE_SETUP.md). The repository includes:
 
-## 📄 Mga Ulat na Nada-download (`/store/reports`)
+- `supabase/setup.sql`: a one-time SQL Editor bundle for a **new, dedicated** project.
+- `supabase/migrations/`: versioned schema and transaction migrations.
+- `.env.example`: the public project URL and publishable-key settings.
+- Generated database types and executable PostgreSQL security/business tests.
 
-Available bilang **CSV (Excel na may UTF-8 BOM)** at **Printable A4 / PDF**:
-1. **Imbentaryo Ngayon** — Lahat ng aktibong paninda, puhunan, benta, margin %, at total value.
-2. **Galaw ng Stock** — Append-only ledger ng bawat purchase, sale, return, spoilage, at count.
-3. **Konti na / Ubos** — Paubos na paninda kasama ang suggested reorder qty at estimated cost.
-4. **Talaan ng Benta** — Lahat ng completed at voided sales, receipt number, profit, at cash.
-5. **Buod ng Kita** — Araw-araw na benta, puhunan, tubo, gastos, at netong kita na may average.
-6. **Bilang ng Paninda** — Physical count reconciliation outputs at shrinkage value.
-7. **Gastos** — Operating expenses grouped by category.
+No live Supabase project is required to explore the demo. No hosted project was created or changed by this conversion. Real stores start empty and use Supabase Auth and Postgres; they never silently fall back to demo data when a connection fails. Never expose a secret or `service_role` key in public environment variables.
 
----
+## What is included
 
-## 🔒 Mga Sinadyang Iniwan para sa v2 (Structural Seams)
+| Workspace | Features |
+| --- | --- |
+| Point of sale | Product/SKU search, categories, frequent picks, quantity edits, discounts, live change, cash and credit checkout, downpayments, printable 58 mm receipts |
+| Inventory | Products/categories, cost and margin preview, low/out/expiring stock filters, restocking, deductions, archive, movement history |
+| Physical count | Actual quantities, stock reconciliation, missing-stock cost, audit entries even for matching quantities |
+| Overview | Date filters, sales/COGS/gross/net profit, expenses, average sale, daily chart, top products, restock alerts, target progress, receipt view and owner-authorized voids |
+| Customer credit | Manual debts, linked credit sales, partial/final payments, due dates, payment histories and balances |
+| Expenses | Date/search filters, category records, optional cash payouts, audited payout reversal when deleted |
+| Cash drawer | Opening float, deposits, payouts, daily expected cash, actual counts and variance |
+| Reports | Seven source-backed reports, UTF-8 CSV, and browser printing / Save as PDF |
+| Settings | Store/receipt details, daily target, language, light/dark theme, ledger checks, account password, and staff access |
+| Authentication | Signup/login/logout, verification callbacks, password reset, store onboarding, membership-scoped data |
 
-Alinsunod sa Section 11 ng disenyo, hindi muna isinama ang mga sumusunod sa v1 ngunit may nakahandang seams:
-1. **Login at User Roles**: May nullable `user_id` column sa `sales` at `stock_movements`.
-2. **Utang / Lista Ledger**: May modular structure para madaling ikabit ang `customers` at `credit_ledger` sa future update.
-3. **Offline Mode**: Lahat ng network request ay dumadaan lamang sa iisang sentralisadong module (`assets/js/api.js`) upang madaling lagyan ng ServiceWorker at IndexedDB queue.
-4. **Barcode Scanner**: Handa na ang `sku` column at instant LIKE/FULLTEXT search para sa USB/Bluetooth barcode scanner.
-5. **Multiple Branches**: Walang hardcoded store name sa views; lahat ay binabasa mula sa `settings` table.
+The interface supports Filipino and English, keyboard navigation, native dialogs, reduced motion, and responsive phone/tablet/desktop layouts.
 
+### Cashier shortcuts
+
+- `/`: focus product search.
+- `Enter` in search: add the first matching product.
+- `1`–`9` outside a form: add the corresponding catalog result.
+- `F2`: checkout.
+- `Esc`: close a dialog, or clear the cart when no dialog is open.
+- `Space` on the success receipt: start a new sale.
+
+## Financial and stock behavior
+
+Money uses centavos and quantities support three decimals. The database calculates checkout totals from authoritative product prices, combines duplicate lines, rejects overselling/overpayment, and atomically records sales, stock, cash, and credit. A per-store row lock protects receipt sequencing and concurrent writes; UUID request keys make retries idempotent.
+
+Stock movements are append-only through the app. Historical receipt prices/costs stay unchanged. Voids restore stock and reverse collected cash; credit sales with later repayments require reconciliation first. Cash counts record observations without changing expected cash. Expenses and debt cash receipts affect the current drawer day separately from their annotated business dates.
+
+Every exposed table has RLS. Browser clients can read their store's records but cannot directly mutate business tables. Protected transaction handlers verify the current membership and owner role for restricted operations. User-editable metadata is never used as authorization.
+
+## Verify
+
+```powershell
+npm run check       # Unit tests, real PostgreSQL migration tests, lint, types, production build
+npm run test:e2e    # Browser workflows and 320–1920 px responsive checks
+npm run db:types    # Rebuild read-only table types from migrations
+npm run db:bundle   # Rebuild setup.sql from ordered migrations
+```
+
+Browser tests require Chromium: `npx playwright install chromium`. `npm run test:visual` captures local screenshots when a dev server is already running. Screenshots, traces, credentials, private dumps, and old application files are excluded from the public repository.
+
+Database tests use embedded PostgreSQL with minimal Auth stand-ins. A live project's signup/email/PostgREST configuration and multi-connection deployment behavior still need to be verified after you create and connect it. See [verification details](docs/VERIFICATION.md).
+
+For a production server, set the public Supabase values before the build, then run `npm run build` and `npm run start`. The demo remains clearly labeled if both settings are absent.
+
+## Project structure
+
+- `src/app`: App Router pages, protected workspace, auth callback, global styles.
+- `src/components`: shell, provider, accessible dialogs/forms, authentication and receipts.
+- `src/features`: operational store screens.
+- `src/lib`: typed domain, calculations, reports, demo adapter, Supabase clients/types.
+- `supabase`: normalized schema, RLS, guarded transactions, and local development configuration.
+- `tests`: domain/config/report tests and browser scenarios.
+- `scripts`: migration-based database tests, type generation, bundling, and screenshots.
+
+The original PHP/MySQL source remains locally intact and ignored by this new public repository. Private historical records were not imported. See [the legacy migration procedure](docs/LEGACY_MIGRATION.md) if those records must be carried forward.

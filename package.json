@@ -1,23 +1,45 @@
 {
-  "name": "tindahub", "version": "2.0.0", "private": true, "type": "module",
+  "name": "tindahub",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
   "description": "TindaHub — Next.js sari-sari store POS and inventory, ready for Supabase Postgres",
-  "engines": { "node": ">=22.0.0" },
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
-    "dev": "next dev --hostname 127.0.0.1", "build": "next build", "start": "next start --hostname 127.0.0.1",
-    "lint": "eslint src tests/unit next.config.ts", "typecheck": "tsc --noEmit",
-    "test": "tsx --test tests/unit/*.test.ts", "test:db": "node scripts/test-database.mjs",
+    "dev": "next dev --hostname 127.0.0.1",
+    "build": "next build",
+    "start": "next start --hostname 127.0.0.1",
+    "lint": "eslint src tests/unit tests/e2e scripts/*.mjs next.config.ts playwright.config.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test tests/unit/*.test.ts",
+    "test:db": "node scripts/test-database.mjs",
     "test:e2e": "playwright test --config playwright.config.ts",
-    "check": "npm test && npm run lint && npm run typecheck",
-    "db:bundle": "node scripts/bundle-database.mjs"
+    "check": "npm test && npm run test:db && npm run lint && npm run typecheck && npm run build",
+    "db:bundle": "node scripts/bundle-database.mjs",
+    "db:types": "node scripts/generate-database-types.mjs",
+    "test:visual": "node scripts/visual-check.mjs"
   },
   "dependencies": {
-    "@supabase/ssr": "0.12.7", "@supabase/supabase-js": "2.118.0", "lucide-react": "1.61.0",
-    "next": "16.4.3", "react": "19.3.1", "react-dom": "19.3.1"
+    "@fontsource-variable/manrope": "5.3.0",
+    "@supabase/ssr": "0.12.7",
+    "@supabase/supabase-js": "2.118.0",
+    "lucide-react": "1.61.0",
+    "next": "16.4.3",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
   },
   "devDependencies": {
-    "@electric-sql/pglite": "0.5.13", "@playwright/test": "1.64.1", "@types/node": "24.13.3",
-    "@types/react": "19.2.14", "@types/react-dom": "19.2.3", "eslint": "9.39.5",
-    "eslint-config-next": "16.4.2", "tsx": "4.21.0", "typescript": "5.9.3"
+    "@electric-sql/pglite": "0.5.13",
+    "@playwright/test": "1.64.1",
+    "@types/node": "24.13.3",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.4.2",
+    "prettier": "3.9.10",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3"
   }
 }
-

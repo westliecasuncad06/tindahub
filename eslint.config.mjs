@@ -7,7 +7,7 @@ export default defineConfig([
   {
     // Pure domain/config files cannot contain Next.js navigation links.
     files: ["src/lib/**/*.ts", "tests/unit/**/*.ts", "next.config.ts"],
-    rules: { "@next/next/no-html-link-for-pages": "off" }
+    rules: { "@next/next/no-html-link-for-pages": "off" },
   },
-  globalIgnores([".next/**", "node_modules/**", "legacy-original/**"])
+  globalIgnores([".next/**", "node_modules/**", "legacy-original/**"]),
 ]);

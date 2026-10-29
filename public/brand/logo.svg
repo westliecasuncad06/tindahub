@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="logoBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="50%" stop-color="#ea580c"/>
+      <stop offset="100%" stop-color="#9a3412"/>
+    </linearGradient>
+
+    <!-- Deep Drop Shadow -->
+    <filter id="logoShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.35"/>
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.2"/>
+    </filter>
+
+    <filter id="elementShadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+
+    <!-- Gold Coin Gradient -->
+    <linearGradient id="logoGoldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="40%" stop-color="#facc15"/>
+      <stop offset="100%" stop-color="#ca8a04"/>
+    </linearGradient>
+
+    <!-- Store Interior Backdrop -->
+    <linearGradient id="logoInterior" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#18181b"/>
+      <stop offset="100%" stop-color="#27272a"/>
+    </linearGradient>
+
+    <!-- Counter Wood Gradient -->
+    <linearGradient id="woodGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#78350f"/>
+      <stop offset="50%" stop-color="#92400e"/>
+      <stop offset="100%" stop-color="#78350f"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Squircle Base with Soft Shadow -->
+  <g filter="url(#logoShadow)">
+    <rect x="24" y="24" width="464" height="464" rx="112" fill="url(#logoBgGrad)"/>
+    <rect x="24" y="24" width="464" height="464" rx="112" fill="none" stroke="#ffedd5" stroke-width="4" stroke-opacity="0.4"/>
+  </g>
+
+  <!-- Top Glass Sheen / Highlight Arc -->
+  <path d="M 136 28 L 376 28 Q 484 28 484 136 L 484 200 Q 320 80 150 80 Q 70 80 28 150 L 28 136 Q 28 28 136 28 Z" fill="#ffffff" fill-opacity="0.18"/>
+
+  <!-- Store Front Window Cutout -->
+  <rect x="88" y="200" width="336" height="216" rx="36" fill="url(#logoInterior)"/>
+  <rect x="88" y="200" width="336" height="216" rx="36" fill="none" stroke="#451a03" stroke-width="4" stroke-opacity="0.6"/>
+
+  <!-- Store Counter Shelf -->
+  <rect x="104" y="336" width="304" height="64" rx="16" fill="url(#woodGrad)" filter="url(#elementShadow)"/>
+  <rect x="108" y="336" width="296" height="10" rx="5" fill="#f59e0b" fill-opacity="0.8"/>
+
+  <!-- Glowing Counter Emblem: Stylized TindaHub Coin / Basket Monogram -->
+  <g filter="url(#elementShadow)">
+    <circle cx="256" cy="280" r="76" fill="url(#logoGoldGrad)"/>
+    <circle cx="256" cy="280" r="66" fill="#a16207"/>
+    <circle cx="256" cy="280" r="60" fill="url(#logoGoldGrad)"/>
+
+    <!-- Sharp Modern "T" Monogram with Store Roof Top Bar -->
+    <path d="M 216 238 L 296 238 L 296 262 L 270 262 L 270 322 L 242 322 L 242 262 L 216 262 Z" fill="#ffffff"/>
+
+    <!-- Small Sparkle on Coin -->
+    <path d="M 292 232 Q 292 242 302 242 Q 292 242 292 252 Q 292 242 282 242 Q 292 242 292 232 Z" fill="#ffffff"/>
+  </g>
+
+  <!-- Awning (Sari-Sari Store Tolda Canopy) -->
+  <g filter="url(#elementShadow)">
+    <!-- Awning White Base with 7 Scalloped Waves -->
+    <path d="M 64 128 L 448 128 L 424 216 Q 424 232 400 232 Q 376 232 376 216 Q 376 232 352 232 Q 328 232 328 216 Q 328 232 304 232 Q 280 232 280 216 Q 280 232 256 232 Q 232 232 232 216 Q 232 232 208 232 Q 184 232 184 216 Q 184 232 160 232 Q 136 232 136 216 Q 136 232 112 232 Q 88 232 88 216 L 64 128 Z" fill="#ffffff"/>
+
+    <!-- Vibrant Burnt Orange Canopy Stripes -->
+    <!-- Stripe 1 -->
+    <path d="M 96 128 L 148 128 L 142 216 Q 142 232 122 232 Q 102 232 102 216 Z" fill="#ea580c"/>
+    <!-- Stripe 2 -->
+    <path d="M 196 128 L 248 128 L 244 216 Q 244 232 224 232 Q 204 232 204 216 Z" fill="#ea580c"/>
+    <!-- Stripe 3 -->
+    <path d="M 296 128 L 348 128 L 344 216 Q 344 232 324 232 Q 304 232 304 216 Z" fill="#ea580c"/>
+    <!-- Stripe 4 -->
+    <path d="M 396 128 L 440 128 L 420 216 Q 420 232 402 232 Q 388 232 388 216 Z" fill="#ea580c"/>
+
+    <!-- Canopy Top Framework Bar -->
+    <rect x="56" y="116" width="400" height="18" rx="9" fill="#ffedd5"/>
+    <rect x="60" y="118" width="392" height="6" rx="3" fill="#ffffff" fill-opacity="0.8"/>
+  </g>
+
+  <!-- Golden Stars & Sparkles (Retail Joy & Good Fortune) -->
+  <g fill="#fef08a" filter="url(#elementShadow)">
+    <!-- Big Sparkle Top-Right -->
+    <path d="M 404 60 Q 404 88 432 88 Q 404 88 404 116 Q 404 88 376 88 Q 404 88 404 60 Z"/>
+    <!-- Mini Sparkle -->
+    <circle cx="440" cy="120" r="5" fill="#fef08a"/>
+    <circle cx="72" cy="190" r="4" fill="#fef08a" fill-opacity="0.7"/>
+  </g>
+</svg>

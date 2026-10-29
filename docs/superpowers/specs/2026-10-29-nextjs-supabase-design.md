@@ -1,6 +1,6 @@
 # TindaHub Next.js and Supabase conversion — proposed design
 
-Status: approved by the user. Task 1 (typed domain and dependency foundation) is implemented; Supabase migrations, auth, application screens, and final delivery remain. The user asked to prepare Supabase files without creating or changing a live project.
+Status: approved by the user. The typed domain, Supabase migrations/auth integration, and application screens are implemented. Final verification/review and repository delivery are in progress. The user asked to prepare Supabase files without creating or changing a live project.
 
 ## Intent
 
@@ -115,4 +115,4 @@ A production deployment is outside the current request. GitHub push is explicitl
 - Next.js installation: https://nextjs.org/docs/app/getting-started/installation
 - Supabase SSR clients: https://supabase.com/docs/guides/auth/server-side/nextjs
 
-Task 1 is covered by the domain test suite. No live database migration or complete browser/application verification has been performed yet. The later tasks must satisfy the remaining verification and delivery requirements.
+The application is verified locally with domain/config/report tests, actual PostgreSQL migration tests, browser workflows, responsive/print checks, and production builds. No live Supabase database migration or hosted Auth/email flow has been performed; that remains a connection-time check for the user's future project. Delivery evidence is recorded in `docs/VERIFICATION.md`.

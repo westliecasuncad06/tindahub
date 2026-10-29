@@ -1,6 +1,6 @@
 # Next.js conversion: first-step foundation
 
-This branch contains the first implementation step, not the completed replacement app. The approved remaining work is in [the implementation plan](superpowers/plans/2026-10-29-nextjs-supabase.md).
+This document describes the domain foundation introduced in the first implementation step. It is now used by the full Next.js application. See [the README](../README.md) for current setup and [the implementation plan](superpowers/plans/2026-10-29-nextjs-supabase.md) for delivery progress.
 
 ## Run the verified foundation
 
@@ -14,7 +14,7 @@ npm run lint
 npm run check
 ```
 
-The 29 tests cover real domain behavior. There are no application routes yet, so `npm run dev`, the production build, browser flows, and database commands will become usable in the subsequent planned tasks.
+The domain tests cover real behavior and are supplemented by configuration/report tests, migration-based PostgreSQL checks, browser workflows, and a production build. `npm run check` runs the current unit/database/lint/type/build checks; `npm run test:e2e` verifies browser flows.
 
 ## Interfaces
 
